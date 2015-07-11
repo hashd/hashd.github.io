@@ -3,28 +3,13 @@ layout: page
 title: About
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+Hi, I'm Kiran. A Computer Science Grad from IIIT, Hyderabad currently working as a Software Development Engineer for Imaginea, BU of Pramati Technologies after having worked for more than 2 years with Dell IT GDC.
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+Focus of work so far has been around Data Integration, Management and Visualization which are key to businesses as they scale up. Apart from working, I spend my time exploring open source technologies, software and linux distributions. I blog, I play, I code, I listen, I read, I explore.
 
-There are currently two themes built on Poole:
+On a social note,
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
-
-Learn more and contribute on [GitHub](https://github.com/poole).
-
-## Setup
-
-Some fun facts about the setup of this project include:
-
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+- I am a big foodie who loves eating a wide variety of food and am always on a lookout for new dishes.
+- I love to travel, go on treks, go on an adventure every now and there. There was a time when I used to be travelling every alternate weekend but things have calmed down.
+- I like playing outdoor sports, badminton and tennis being my favorites.
+- I have an interest in photography, which I inherit from my Dad.

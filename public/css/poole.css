@@ -54,12 +54,12 @@ html {
 }
 
 @font-face {
-  font-family: Arimo;
-  src: url(asset_path('fonts/Arimo'+".eot")); /* IE9 Compat Modes */
-  src: url(asset_path('fonts/Arimo'+".eot?#iefix")) format('embedded-opentype'), /* IE6-IE8 */
-       url(asset_path('fonts/Arimo'+".woff")) format('woff'), /* Modern Browsers */
-       url(asset_path('fonts/Arimo'+".ttf"))  format('truetype'), /* Safari, Android, iOS */
-       url(asset_path('fonts/Arimo'+".svg#svgFontName")) format('svg'); /* Legacy iOS */
+  font-family: "Fantasque Sans Mono";
+  src: url(asset_path('fonts/FantasqueSansMono'+".eot")); /* IE9 Compat Modes */
+  src: url(asset_path('fonts/FantasqueSansMono'+".eot?#iefix")) format('embedded-opentype'), /* IE6-IE8 */
+       url(asset_path('fonts/FantasqueSansMono'+".woff")) format('woff'), /* Modern Browsers */
+       url(asset_path('fonts/FantasqueSansMono'+".ttf"))  format('truetype'), /* Safari, Android, iOS */
+       url(asset_path('fonts/FantasqueSansMono'+".svg#svgFontName")) format('svg'); /* Legacy iOS */
 }
 
 @media (min-width: 38em) {
@@ -160,7 +160,7 @@ abbr[title] {
 /* Code */
 code,
 pre {
-  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-family: "Fantasque Sans Mono", "Ubuntu Mono", Menlo, Monaco, "Courier New", monospace;
 }
 code {
   padding: .25em .5em;

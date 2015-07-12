@@ -52,6 +52,16 @@ html {
   font-size: 16px;
   line-height: 1.5;
 }
+
+@font-face {
+  font-family: Arimo;
+  src: url(asset_path('fonts/Arimo'+".eot")); /* IE9 Compat Modes */
+  src: url(asset_path('fonts/Arimo'+".eot?#iefix")) format('embedded-opentype'), /* IE6-IE8 */
+       url(asset_path('fonts/Arimo'+".woff")) format('woff'), /* Modern Browsers */
+       url(asset_path('fonts/Arimo'+".ttf"))  format('truetype'), /* Safari, Android, iOS */
+       url(asset_path('fonts/Arimo'+".svg#svgFontName")) format('svg'); /* Legacy iOS */
+}
+
 @media (min-width: 38em) {
   html {
     font-size: 20px;

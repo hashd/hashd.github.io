@@ -20,6 +20,3 @@ Its important to understand what well formatted code means.
 - Follows code prose. *Writing code is like poetry and one must learn to group logical parts of the code and separate such groups with a single white line. One should be able to summarize such a logical group in a single line.*
 - Logical separation and minimal code duplication
 - Zero typos
-
-
-

@@ -1,5 +1,9 @@
 
-## Why Elixir?
+---
+layout: post
+title: Why Elixir?
+---
+
 There was this urge in me to try out Functional Programming since quite a few days and one day I got my hands on 'Programming Elixir' by Dave Thomas. The tagline 'Functional |> Concurrent |> Pragmatic |> Fun' particularly caught my eye and I told to myself 'How can anything that goes with Concurrency be fun'. So I started reading the first chapter on 'Pattern Matching' which I had only heard of in other languages like Scala and Rust. The chapter was not only enlightening to me but I really started to enjoy and see the power of pattern matching (little did I know that I only had a small glimpse of it in that chapter). Just that single chapter from 'Programming Elixir' and I was totally sold.
 
 From there on every chapter I read, started to take me into a different world than that of Java and JavaScript and with every piece of Code that I had written, I started to have more fun working with functional concepts within Elixir. 

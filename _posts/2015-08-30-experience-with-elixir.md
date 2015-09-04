@@ -29,7 +29,7 @@ Elixir draws a lot of inspiration from the good parts of various modern programm
 
 Ok, enough talk, let us look at some very basic code
 
-{% hightlight elixir %}
+{% highlight elixir %}
 ### Calculating nth fibonacci number
 ### 
 ### Mathematical definition:
@@ -44,7 +44,7 @@ def fib(n), do: fib(n-1) + fib(n-2)
 
 The code is very similar to the mathematical definition of nth fibonacci number, isn't it? Let's take another example, greatest common divisor using euclid's algorithm
 
-{% hightlight elixir %}
+{% highlight elixir %}
 ### Euclid's algorithm
 ###
 ### Mathematical definition:

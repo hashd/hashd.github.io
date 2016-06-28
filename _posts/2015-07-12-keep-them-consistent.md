@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Art of formatting code
+author: Kiran
 ---
 
 > Programs must be written for people to read, and only incidentally for machines to execute

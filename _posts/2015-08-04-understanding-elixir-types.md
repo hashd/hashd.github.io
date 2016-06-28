@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Understanding Elixir Types
+author: Kiran
 ---
 
 Before working on any programming language, you'll need to understand the basic types that it provides. Coming from the world of C++, Java and JavaScript, the basic types in Elixir are a bit strange and peculiar so here I would like to cover them in an easy to understand way for those who have a similar background.

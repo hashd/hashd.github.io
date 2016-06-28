@@ -1,6 +1,7 @@
 ---
 layout: post
 title: My Experience with Elixir so far
+author: Kiran
 ---
 
 With quite a lot of emerging languages these days like Go, Rust, Scala, Clojure, Julia, Nim, Factor, Red, Rebol, Ceylon, Kotlin and *an probable endless list here*, I wanted to give one of them a try so I picked up Rust in October 2014 for I was interested in a systems programming language and also wanted to break away from Interpreters of JavaScript and Virtual Machine of Java. Probably I didn't choose the right set of learning resources for Rust and thus found it very rusty to begin with and lost interest pretty sooner than I expected. That being said, Rust is a wonderful programming language with an interesting set of design goals which helps make safe and reliable systems.
@@ -31,7 +32,7 @@ Ok, enough talk, let us look at some very basic code
 
 {% highlight elixir %}
 ### Calculating nth fibonacci number
-### 
+###
 ### Mathematical definition:
 ###   fib(0) -> 0
 ###   fib(1) -> 1

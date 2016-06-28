@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Fun with Classes in ES6
+author: Kiran
 ---
 
 JavaScript was my favorite language until I met Elixir and now TypeScript for the amount of freedom it provides to the developer (probably enough to even shoot yourself on your feet). JavaScript like many other non-modern languages is trying to catch up on the developer joy train with ES6 and further specs. One of the controversial features that has been added in ES6 is **classes**, a sugar coated syntax to help create functions which would act like classes in a more standard manner.
@@ -14,7 +15,7 @@ let raceBuilder = function (raceName) {
       this.raceName = raceName
       this.name = name
     }
-  } 
+  }
 }
 
 let Orc = raceBuilder("Orcs")

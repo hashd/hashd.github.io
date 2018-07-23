@@ -5,20 +5,20 @@ meta_description: "!Available"
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
 baseurl: /
-google_analytics: 'UA-46278016-1'
-disqus: 'demowebsite'
+google_analytics: 'UA-122845144-1'
+disqus: 'hashd-blog'
 mailchimp-list: 'https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b'
 
 # Authors
 authors:
-  hashd:
+  Kiran:
     name: Kiran Danduprolu
     display_name: Kiran
-    gravatar: 
+    gravatar: 7ce29cba83b9fb3700ee19c1a0511a34
     email: kirandanduprolu@gmail.com
     web: https://kiran.danduprolu.com
     twitter: https://twitter.com/_hash_d
-    description: "Author of uvCharts"
+    description: "Author of uvCharts, Marvelous and Claft"
 
 # Plugins
 plugins: 

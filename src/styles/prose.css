@@ -2,54 +2,74 @@
   max-width: 68ch;
   color: var(--text);
   font-size: var(--fs-md);
-  line-height: 1.7;
+  line-height: 1.8;
+  font-weight: 400;
 }
 .prose > * + * {
   margin-top: var(--sp-4);
 }
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-family: var(--font-display);
+}
 .prose h1 {
-  font-size: var(--fs-2xl);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-top: var(--sp-7);
+  font-size: var(--fs-3xl);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  margin-top: var(--sp-8);
+  line-height: 1;
+  color: var(--text);
+  text-transform: uppercase;
 }
 .prose h2 {
-  font-size: var(--fs-xl);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-top: var(--sp-6);
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-top: var(--sp-7);
+  line-height: 1.1;
+  color: var(--text);
 }
 .prose h3 {
-  font-size: var(--fs-lg);
-  font-weight: 600;
-  margin-top: var(--sp-5);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  margin-top: var(--sp-6);
+  letter-spacing: -0.02em;
+  color: var(--text);
 }
 .prose p {
   margin-top: var(--sp-4);
+  color: var(--text);
 }
 .prose a {
   color: var(--accent);
-  background-image: linear-gradient(var(--accent), var(--accent));
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0% 1px;
-  transition: background-size var(--dur-fast) var(--ease-out);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  font-weight: 600;
+  transition: color var(--dur-fast), text-decoration-color var(--dur-fast);
 }
 .prose a:hover {
-  background-size: 100% 1px;
-  text-decoration: none;
+  color: var(--accent-hover);
+  text-decoration-color: var(--text);
+  background: transparent;
 }
 
 .prose blockquote {
-  border-left: 2px solid var(--border);
-  padding-left: var(--sp-4);
-  color: var(--text-muted);
+  border-left: 4px solid var(--text);
+  background: var(--surface-solid);
+  padding: var(--sp-4);
+  color: var(--text);
   font-style: italic;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--accent);
+  margin: var(--sp-6) 0;
 }
 
 .prose ul,
 .prose ol {
   padding-left: var(--sp-5);
+  color: var(--text);
 }
 .prose li + li {
   margin-top: var(--sp-2);
@@ -59,46 +79,62 @@
   font-family: var(--font-mono);
   font-size: 0.9em;
   background: var(--bg-subtle);
-  padding: 2px 6px;
-  border-radius: 4px;
+  color: var(--text);
+  padding: 0.2em 0.4em;
+  border-radius: 0;
+  border: 1px solid var(--text);
 }
 .prose pre {
-  background: var(--bg-subtle);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: var(--sp-4);
+  background: var(--surface-solid) !important; 
+  border: 2px solid var(--text);
+  border-radius: 0;
+  padding: var(--sp-5);
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 14px;
   line-height: 1.6;
   position: relative;
+  box-shadow: 6px 6px 0 var(--text);
+  margin: var(--sp-6) 0;
+  color: var(--text) !important;
+}
+.prose pre code {
+  color: inherit;
+  background: transparent;
 }
 
 .prose hr {
   border: 0;
-  border-top: 1px solid var(--border);
-  margin: var(--sp-6) 0;
+  height: 2px;
+  background: var(--text);
+  margin: var(--sp-8) 0;
 }
 
 .prose img {
   display: block;
-  margin: var(--sp-5) 0;
-  border-radius: 8px;
-  border: 1px solid var(--border-muted);
+  margin: var(--sp-6) auto;
+  border-radius: 0;
+  border: 4px solid var(--text);
+  box-shadow: 8px 8px 0 var(--accent-warm);
 }
 
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--fs-sm);
+  font-size: var(--fs-md);
+  margin: var(--sp-6) 0;
+  border: 2px solid var(--text);
 }
 .prose th,
 .prose td {
-  border-bottom: 1px solid var(--border-muted);
-  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border);
+  padding: var(--sp-3);
   text-align: left;
 }
 .prose th {
-  background: var(--bg-subtle);
-  font-weight: 600;
+  background: var(--text);
+  color: var(--surface-solid);
+  font-weight: 700;
+  font-family: var(--font-display);
+  border-color: var(--text);
 }

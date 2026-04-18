@@ -1,33 +1,50 @@
 :root {
-  /* Colors (GitHub light) */
-  --bg: #ffffff;
-  --bg-subtle: #f6f8fa;
-  --surface: #ffffff;
-  --border: #d0d7de;
-  --border-muted: #d8dee4;
-  --text: #1f2328;
-  --text-muted: #656d76;
-  --text-faint: #8c959f;
-  --accent: #0969da;
-  --accent-warm: #bc4c00;
-  --shadow-sm: 0 1px 2px rgba(31, 35, 40, 0.04), 0 0 0 1px rgba(31, 35, 40, 0.04);
-  --shadow-md: 0 8px 24px rgba(31, 35, 40, 0.08);
+  /* Colors (Editorial Light Theme) */
+  --bg-color: #fcfbf9;
+  --bg-gradient: radial-gradient(circle at 15% 50%, rgba(255, 235, 220, 0.4), transparent 25%),
+                 radial-gradient(circle at 85% 30%, rgba(220, 230, 255, 0.5), transparent 25%);
+  --bg-subtle: rgba(26, 21, 35, 0.03);
+  --surface: rgba(255, 255, 255, 0.8);
+  --surface-solid: #ffffff;
+  --border: rgba(26, 21, 35, 0.08);
+  --border-muted: rgba(26, 21, 35, 0.04);
+  --border-glass: rgba(255, 255, 255, 0.6);
+  --text: #1a1523;
+  --text-muted: #696571;
+  --text-faint: #aba7b1;
+  
+  --accent: #ff4d00; /* Vibrant Coral/Orange */
+  --accent-hover: #e04400;
+  --accent-light: rgba(255, 77, 0, 0.08);
+  --accent-warm: #ff2a5f;
+  --accent-gradient: linear-gradient(135deg, #ff4d00 0%, #ff2a5f 100%);
 
   /* Tag palette */
-  --tag-blue-bg: #ddf4ff;
-  --tag-blue-fg: #0969da;
-  --tag-green-bg: #dafbe1;
-  --tag-green-fg: #1a7f37;
-  --tag-yellow-bg: #fff8c5;
-  --tag-yellow-fg: #9a6700;
-  --tag-orange-bg: #fff1e5;
-  --tag-orange-fg: #bc4c00;
-  --tag-purple-bg: #fbefff;
-  --tag-purple-fg: #8250df;
+  --tag-blue-bg: rgba(0, 102, 255, 0.08);
+  --tag-blue-fg: #0044aa;
+  --tag-green-bg: rgba(0, 170, 85, 0.08);
+  --tag-green-fg: #007733;
+  --tag-yellow-bg: rgba(255, 170, 0, 0.08);
+  --tag-yellow-fg: #aa6600;
+  --tag-orange-bg: rgba(255, 77, 0, 0.08);
+  --tag-orange-fg: #cc3d00;
+  --tag-purple-bg: rgba(136, 51, 255, 0.08);
+  --tag-purple-fg: #6622cc;
+
+  /* Glassmorphism */
+  --glass-blur: blur(24px);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(26, 21, 35, 0.02), 0 1px 1px rgba(26, 21, 35, 0.02);
+  --shadow-md: 0 12px 24px -6px rgba(26, 21, 35, 0.04), 0 4px 8px -2px rgba(26, 21, 35, 0.03);
+  --shadow-lg: 0 32px 64px -12px rgba(26, 21, 35, 0.08), 0 16px 32px -8px rgba(26, 21, 35, 0.04);
+  --shadow-glass: inset 0 1px 1px white, 0 8px 32px rgba(26, 21, 35, 0.03);
+  --shadow-glass-hover: inset 0 1px 1px white, 0 16px 48px rgba(26, 21, 35, 0.05);
 
   /* Typography */
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Outfit', sans-serif;
 
   /* Spacing scale */
   --sp-1: 4px;
@@ -45,18 +62,24 @@
   --fs-sm: 15px;
   --fs-md: 17px;
   --fs-lg: 20px;
-  --fs-xl: 24px;
-  --fs-2xl: 32px;
-  --fs-3xl: 48px;
+  --fs-xl: 26px;
+  --fs-2xl: 36px;
+  --fs-3xl: 52px;
+  --fs-4xl: 72px;
 
   /* Layout */
-  --content-max: 760px;
-  --chrome-max: 960px;
+  --content-max: 720px;
+  --chrome-max: 1040px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
 
   /* Motion */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --dur-fast: 140ms;
-  --dur-mid: 280ms;
-  --dur-slow: 520ms;
+  --ease-in-out: cubic-bezier(0.8, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.2, 1.2, 0.4, 1);
+  --dur-fast: 200ms;
+  --dur-mid: 400ms;
+  --dur-slow: 700ms;
+  --dur-xslow: 1000ms;
 }

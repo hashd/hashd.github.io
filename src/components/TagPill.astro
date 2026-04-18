@@ -4,45 +4,51 @@ interface Props {
   href?: string;
 }
 const { tag, href } = Astro.props;
+const cleanTag = (tag || '').trim();
 const palette = ['blue', 'green', 'yellow', 'orange', 'purple'] as const;
 let hash = 0;
-for (let i = 0; i < tag.length; i++) hash = (hash * 31 + tag.charCodeAt(i)) >>> 0;
+for (let i = 0; i < cleanTag.length; i++) hash = (hash * 31 + cleanTag.charCodeAt(i)) >>> 0;
 const color = palette[hash % palette.length];
 const Tag = href ? 'a' : 'span';
 ---
 
-<Tag href={href} class:list={['tag', `tag--${color}`]}>{tag}</Tag>
+{cleanTag ? <Tag href={href} class:list={['tag', `tag--${color}`]}>{cleanTag}</Tag> : null}
 <style>
   .tag {
     display: inline-block;
     font-size: 11px;
-    padding: 2px 10px;
-    border-radius: 999px;
-    font-weight: 500;
-    transition: transform var(--dur-fast) var(--ease-spring);
+    padding: 4px 8px;
+    border-radius: 0;
+    border: 1px solid var(--text);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+    transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-out);
+    box-shadow: 2px 2px 0 var(--text);
   }
   a.tag:hover {
     text-decoration: none;
-    transform: scale(1.06);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--accent);
   }
   .tag--blue {
     background: var(--tag-blue-bg);
-    color: var(--tag-blue-fg);
+    color: var(--text);
   }
   .tag--green {
     background: var(--tag-green-bg);
-    color: var(--tag-green-fg);
+    color: var(--text);
   }
   .tag--yellow {
     background: var(--tag-yellow-bg);
-    color: var(--tag-yellow-fg);
+    color: var(--text);
   }
   .tag--orange {
     background: var(--tag-orange-bg);
-    color: var(--tag-orange-fg);
+    color: var(--text);
   }
   .tag--purple {
     background: var(--tag-purple-bg);
-    color: var(--tag-purple-fg);
+    color: var(--text);
   }
 </style>

@@ -58,39 +58,77 @@ const archived = (await getArchivedPosts()).slice(0, 3);
 
 <style>
   .hero {
-    padding: var(--sp-8) 0 var(--sp-5);
+    padding: var(--sp-5) 0 var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    margin-top: var(--sp-7);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -16px; left: -64px; right: -64px; bottom: -16px;
+    background: var(--surface-solid);
+    border: 2px solid var(--text);
+    box-shadow: 8px 8px 0 var(--accent);
+    z-index: -1;
+    transform: rotate(-0.5deg);
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) both;
+  }
+  @media (max-width: 768px) {
+    .hero::before {
+      left: -20px; right: -20px;
+    }
   }
   .intro-label {
-    font-size: 12px;
-    letter-spacing: 2px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--text-faint);
-    animation: rise var(--dur-slow) var(--ease-out) 40ms both;
+    color: var(--surface-solid);
+    background: var(--text);
+    padding: var(--sp-1) var(--sp-2);
+    margin-bottom: var(--sp-3);
+    border-radius: 0;
+    box-shadow: 3px 3px 0 var(--accent-warm);
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) 100ms both;
   }
   .hero h1 {
-    margin: 10px 0 var(--sp-3);
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
-    animation: rise var(--dur-slow) var(--ease-out) 120ms both;
+    margin: 0 0 var(--sp-3);
+    font-size: var(--fs-3xl);
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--text);
+    text-transform: uppercase;
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) 200ms both;
   }
   .hero .lede {
     margin: 0;
-    max-width: 560px;
+    max-width: 680px;
     color: var(--text-muted);
-    font-size: 18px;
-    animation: rise var(--dur-slow) var(--ease-out) 200ms both;
+    font-size: var(--fs-lg);
+    line-height: 1.4;
+    font-weight: 500;
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) 300ms both;
   }
   .cards {
     display: grid;
-    gap: var(--sp-3);
+    gap: var(--sp-6);
   }
   .cards.archive {
-    opacity: 0.9;
+    opacity: 1;
   }
   .empty {
     color: var(--text-muted);
+    background: var(--surface);
+    padding: var(--sp-6);
+    border: 2px dashed var(--border);
+    text-align: center;
+    font-family: var(--font-mono);
   }
 </style>
 

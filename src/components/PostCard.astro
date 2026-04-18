@@ -20,7 +20,7 @@ const dateStr = post.data.date.toLocaleDateString('en-US', {
   <h3 class="post-title">{post.data.title}</h3>
   <p class="post-excerpt">{post.data.description}</p>
   <div class="post-meta">
-    {post.data.tags.map((t) => <TagPill tag={t} href={`/tags/${t}/`} />)}
+    {post.data.tags.map((t) => <TagPill tag={t} />)}
     <span class="date">{dateStr}</span>
   </div>
 </a>
@@ -29,50 +29,63 @@ const dateStr = post.data.date.toLocaleDateString('en-US', {
   .post-card {
     display: block;
     color: inherit;
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    border: 2px solid var(--border);
+    border-radius: 0;
     padding: var(--sp-4) var(--sp-5);
-    background: var(--surface);
-    transition:
-      border-color var(--dur-fast) var(--ease-out),
-      box-shadow var(--dur-mid) var(--ease-out),
-      transform var(--dur-fast) var(--ease-out);
+    background: var(--surface-solid);
+    box-shadow: 4px 4px 0 rgba(26, 21, 35, 1);
+    transition: transform var(--dur-fast) var(--ease-spring), box-shadow var(--dur-fast) var(--ease-spring), border-color var(--dur-fast) var(--ease-out);
+    position: relative;
+    overflow: hidden;
   }
   .post-card.featured {
-    padding: var(--sp-5) var(--sp-6);
+    padding: var(--sp-6) var(--sp-6);
+    background: linear-gradient(135deg, var(--surface-solid) 0%, rgba(255, 235, 220, 0.5) 100%);
+    border-color: var(--text);
   }
   .post-card:hover {
-    border-color: rgba(9, 105, 218, 0.4);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
+    border-color: var(--text);
+    box-shadow: 8px 8px 0 var(--accent);
+    transform: translate(-4px, -4px);
     text-decoration: none;
-  }
-  .post-card:hover .post-title {
-    color: var(--accent);
   }
   .post-title {
     margin: 0;
     font-size: var(--fs-lg);
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-weight: 800;
     letter-spacing: -0.01em;
+    color: var(--text);
     transition: color var(--dur-fast) var(--ease-out);
+  }
+  .post-card.featured .post-title {
+    font-size: var(--fs-2xl);
+  }
+  .post-card:hover .post-title {
+    color: var(--accent);
   }
   .post-excerpt {
     margin: var(--sp-2) 0 0;
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.55;
+    font-size: var(--fs-md);
+    color: var(--text-muted);
+    line-height: 1.5;
   }
   .post-meta {
-    margin-top: var(--sp-3);
+    margin-top: var(--sp-5);
     display: flex;
     align-items: center;
     gap: var(--sp-2);
     flex-wrap: wrap;
+    border-top: 1px dashed var(--border);
+    padding-top: var(--sp-3);
   }
   .date {
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    font-weight: 500;
     color: var(--text-muted);
-    margin-left: var(--sp-1);
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 </style>

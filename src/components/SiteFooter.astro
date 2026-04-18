@@ -1,0 +1,23 @@
+---
+const year = new Date().getUTCFullYear();
+---
+<footer>
+  <div class="chrome footer-inner">
+    <div>© {year} Kiran Danduprolu</div>
+    <div class="links">
+      <a href="https://github.com/hashd">GitHub</a>
+      <a href="https://twitter.com/_hash_d">Twitter</a>
+      <a href="mailto:kirandanduprolu@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+<style>
+  footer {
+    margin-top: var(--sp-9); padding: var(--sp-7) 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted); font-size: var(--fs-xs);
+  }
+  .footer-inner { display: flex; justify-content: space-between; gap: var(--sp-4); }
+  .links a { color: var(--text-muted); margin-right: var(--sp-4); }
+  .links a:hover { color: var(--accent); }
+</style>

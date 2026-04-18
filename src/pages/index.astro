@@ -1,6 +1,74 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getLivePosts, getArchivedPosts, getFeaturedLivePosts } from '../lib/posts';
+
+const featured = await getFeaturedLivePosts();
+const live = (await getLivePosts()).filter((p) => !featured.includes(p)).slice(0, 6 - featured.length);
+const archived = (await getArchivedPosts()).slice(0, 3);
 ---
 <BaseLayout title="Kiran Danduprolu" description="Notes on systems, types, and the craft of code.">
-  <div class="content"><h1>Homepage placeholder</h1></div>
+  <div class="content">
+    <section class="hero">
+      <div class="intro-label">kiran.danduprolu.com</div>
+      <h1>Notes on systems, types,<br/>and the craft of code.</h1>
+      <p class="lede">A writing-forward corner of the internet. Mostly backend, occasionally functional, sometimes a yak getting shaved in public.</p>
+    </section>
+
+    <div class="section-title">
+      <h2>Latest</h2>
+      <a class="see-all" href="/writing/">All writing →</a>
+    </div>
+
+    <div class="cards">
+      {featured.map((p) => <PostCard post={p} featured />)}
+      {live.map((p) => <PostCard post={p} />)}
+      {live.length === 0 && featured.length === 0 && (
+        <p class="empty">New posts coming soon. In the meantime, the archive is below.</p>
+      )}
+    </div>
+
+    {archived.length > 0 && (
+      <>
+        <div class="section-title">
+          <h2>From the archive</h2>
+          <a class="see-all" href="/writing/">See all →</a>
+        </div>
+        <div class="cards archive">
+          {archived.map((p) => <PostCard post={p} />)}
+        </div>
+      </>
+    )}
+  </div>
 </BaseLayout>
+
+<style>
+  .hero { padding: var(--sp-8) 0 var(--sp-5); }
+  .intro-label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-faint);
+    animation: rise var(--dur-slow) var(--ease-out) 40ms both; }
+  .hero h1 { margin: 10px 0 var(--sp-3); font-size: 40px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15;
+    animation: rise var(--dur-slow) var(--ease-out) 120ms both; }
+  .hero .lede { margin: 0; max-width: 560px; color: var(--text-muted); font-size: 18px;
+    animation: rise var(--dur-slow) var(--ease-out) 200ms both; }
+  .cards { display: grid; gap: var(--sp-3); }
+  .cards.archive { opacity: 0.9; }
+  .empty { color: var(--text-muted); }
+</style>
+
+<script>
+  function wireReveal() {
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.cards .reveal-target'));
+    cards.forEach((el, i) => (el.style.transitionDelay = `${Math.min(i, 3) * 60}ms`));
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          io.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    cards.forEach((c) => io.observe(c));
+    cards.slice(0, 2).forEach((c) => c.classList.add('revealed'));
+  }
+  document.addEventListener('astro:page-load', wireReveal);
+</script>

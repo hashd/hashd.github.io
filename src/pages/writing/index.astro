@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import TagPill from '../../components/TagPill.astro';
+import { getLivePosts, getArchivedPosts, getAllTagsWithCounts } from '../../lib/posts';
+
+const live = await getLivePosts();
+const archived = await getArchivedPosts();
+const tags = await getAllTagsWithCounts();
+---
+<BaseLayout title="Writing · Kiran Danduprolu" description="Everything I've written.">
+  <div class="content">
+    <h1 class="page-title">Writing</h1>
+
+    {tags.length > 0 && (
+      <div class="tag-row">
+        {tags.map((t) => <TagPill tag={`${t.tag} · ${t.count}`} href={`/tags/${t.tag}/`} />)}
+      </div>
+    )}
+
+    {live.length > 0 && (
+      <div class="section cards">
+        {live.map((p) => <PostCard post={p} />)}
+      </div>
+    )}
+
+    {archived.length > 0 && (
+      <details class="archive-fold" open={live.length === 0}>
+        <summary>Archive ({archived.length})</summary>
+        <div class="cards archive">
+          {archived.map((p) => <PostCard post={p} />)}
+        </div>
+      </details>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-title { margin: var(--sp-7) 0 var(--sp-3); font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.02em; }
+  .tag-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-bottom: var(--sp-6); }
+  .cards { display: grid; gap: var(--sp-3); }
+  .cards.archive { opacity: 0.9; margin-top: var(--sp-4); }
+  .archive-fold { margin-top: var(--sp-7); border-top: 1px solid var(--border); padding-top: var(--sp-5); }
+  .archive-fold summary {
+    font-size: var(--fs-sm); color: var(--text-muted); font-weight: 600;
+    cursor: pointer; user-select: none; padding: var(--sp-2) 0;
+  }
+</style>

@@ -17,11 +17,20 @@ interface Props {
   next: Post | null;
 }
 const { post, body, prev, next } = Astro.props;
-const dateStr = post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const dateStr = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 const rt = readTimeMinutes(body);
 const ogUrl = new URL(`/og${postHref(post)}.png`, Astro.site).toString();
 ---
-<BaseLayout title={`${post.data.title} · Kiran Danduprolu`} description={post.data.description} ogImage={ogUrl}>
+
+<BaseLayout
+  title={`${post.data.title} · Kiran Danduprolu`}
+  description={post.data.description}
+  ogImage={ogUrl}
+>
   <div class="content post-chrome">
     <a class="back" href="/writing/">← All writing</a>
     <h1 class="post-title">{post.data.title}</h1>
@@ -36,16 +45,26 @@ const ogUrl = new URL(`/og${postHref(post)}.png`, Astro.site).toString();
     </div>
     {post.data.archived && <ArchivedRibbon date={post.data.date} />}
     <Prose><slot /></Prose>
-    {(prev || next) && !post.data.archived && (
-      <nav class="prev-next">
-        {prev
-          ? <a class="pn" href={postHref(prev)}>← {prev.data.title}</a>
-          : <span />}
-        {next
-          ? <a class="pn next" href={postHref(next)}>{next.data.title} →</a>
-          : <span />}
-      </nav>
-    )}
+    {
+      (prev || next) && !post.data.archived && (
+        <nav class="prev-next">
+          {prev ? (
+            <a class="pn" href={postHref(prev)}>
+              ← {prev.data.title}
+            </a>
+          ) : (
+            <span />
+          )}
+          {next ? (
+            <a class="pn next" href={postHref(next)}>
+              {next.data.title} →
+            </a>
+          ) : (
+            <span />
+          )}
+        </nav>
+      )
+    }
     <NewsletterBlock variant="compact" />
     <Giscus />
     <CopyCodeButton />
@@ -53,17 +72,47 @@ const ogUrl = new URL(`/og${postHref(post)}.png`, Astro.site).toString();
 </BaseLayout>
 
 <style>
-  .post-chrome { padding: var(--sp-7) 0; }
-  .back { font-size: var(--fs-sm); color: var(--text-muted); display: inline-block; margin-bottom: var(--sp-5); }
-  .post-title { font-size: var(--fs-3xl); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 var(--sp-3); }
-  .byline { color: var(--text-muted); font-size: var(--fs-sm); display: flex; gap: var(--sp-2); align-items: center; flex-wrap: wrap; }
-  .byline .tags { display: inline-flex; gap: var(--sp-2); }
+  .post-chrome {
+    padding: var(--sp-7) 0;
+  }
+  .back {
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    display: inline-block;
+    margin-bottom: var(--sp-5);
+  }
+  .post-title {
+    font-size: var(--fs-3xl);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 var(--sp-3);
+  }
+  .byline {
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    display: flex;
+    gap: var(--sp-2);
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .byline .tags {
+    display: inline-flex;
+    gap: var(--sp-2);
+  }
   .prev-next {
-    display: flex; justify-content: space-between; gap: var(--sp-4);
+    display: flex;
+    justify-content: space-between;
+    gap: var(--sp-4);
     margin: var(--sp-7) 0 0;
     padding: var(--sp-5) 0;
     border-top: 1px solid var(--border);
   }
-  .pn { color: var(--text); font-weight: 500; }
-  .pn.next { text-align: right; margin-left: auto; }
+  .pn {
+    color: var(--text);
+    font-weight: 500;
+  }
+  .pn.next {
+    text-align: right;
+    margin-left: auto;
+  }
 </style>

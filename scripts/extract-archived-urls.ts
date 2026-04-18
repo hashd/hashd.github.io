@@ -16,4 +16,7 @@ async function main() {
   for (const u of urls.sort()) console.log(u);
 }
 
-main().catch((err) => { console.error(err); process.exit(1); });
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

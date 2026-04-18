@@ -16,6 +16,7 @@ const { title, description, ogImage } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const og = ogImage ?? new URL('/og/default.png', Astro.site).toString();
 ---
+
 <html lang="en">
   <head>
     <meta charset="utf-8" />

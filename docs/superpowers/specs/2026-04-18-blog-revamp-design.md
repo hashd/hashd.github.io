@@ -33,23 +33,23 @@ Old posts are preserved verbatim under the same URLs and flagged as archived.
 
 ## Direction Decisions
 
-| Decision          | Choice                                                                 |
-| ----------------- | ---------------------------------------------------------------------- |
-| Revamp scope      | Full reset — new stack, new design, rethink the site                   |
-| Site identity     | Writing-forward, with resume / projects / socials as supporting links  |
-| Stack             | Astro 4.x, static output, MDX                                          |
-| Fate of old posts | Migrate all 6, redesign as an archive section; URLs preserved           |
-| Visual direction  | GitHub Native (sans, card-per-post, pill tags) — elevated with motion  |
-| Implementation    | Side branch `astro-rebuild`, cut over at the end                       |
-| Hosting           | GitHub Pages + existing `CNAME` (`kiran.danduprolu.com`)               |
-| Comments          | Giscus (GitHub Discussions)                                            |
-| Newsletter        | Buttondown                                                             |
-| Analytics         | GA4                                                                    |
-| Syntax theme      | Shiki with `github-light`                                              |
-| Diagrams          | Mermaid, rendered at build time to static SVG                          |
-| OG images         | Auto-generated per post at build time                                  |
-| RSS / dark mode   | Dropped; noted in `FUTURE_VISION.md`                                   |
-| Search            | Deferred; tracked in `FUTURE_VISION.md`                                |
+| Decision          | Choice                                                                |
+| ----------------- | --------------------------------------------------------------------- |
+| Revamp scope      | Full reset — new stack, new design, rethink the site                  |
+| Site identity     | Writing-forward, with resume / projects / socials as supporting links |
+| Stack             | Astro 4.x, static output, MDX                                         |
+| Fate of old posts | Migrate all 6, redesign as an archive section; URLs preserved         |
+| Visual direction  | GitHub Native (sans, card-per-post, pill tags) — elevated with motion |
+| Implementation    | Side branch `astro-rebuild`, cut over at the end                      |
+| Hosting           | GitHub Pages + existing `CNAME` (`kiran.danduprolu.com`)              |
+| Comments          | Giscus (GitHub Discussions)                                           |
+| Newsletter        | Buttondown                                                            |
+| Analytics         | GA4                                                                   |
+| Syntax theme      | Shiki with `github-light`                                             |
+| Diagrams          | Mermaid, rendered at build time to static SVG                         |
+| OG images         | Auto-generated per post at build time                                 |
+| RSS / dark mode   | Dropped; noted in `FUTURE_VISION.md`                                  |
+| Search            | Deferred; tracked in `FUTURE_VISION.md`                               |
 
 ## Architecture
 
@@ -82,20 +82,20 @@ Old posts are preserved verbatim under the same URLs and flagged as archived.
 
 ### URL Scheme
 
-| Path                  | Purpose                                                              |
-| --------------------- | -------------------------------------------------------------------- |
-| `/`                   | Homepage — hero + latest posts + archive strip                       |
-| `/writing/`           | All writing index (current + archived, archived collapsed)           |
-| `/YYYY/MM/slug/`      | Individual post (matches existing Jekyll permalinks)                 |
-| `/tags/`              | Tag index                                                            |
-| `/tags/:tag/`         | Posts filtered by tag                                                |
-| `/about/`             | About page (migrated)                                                |
-| `/projects/`          | Projects page (migrated)                                             |
-| `/resume/`            | Resume page with linked PDF (migrated)                               |
-| `/newsletter/`        | Buttondown subscribe form                                            |
-| `/404.html`           | Branded 404                                                          |
-| `/sitemap-index.xml`  | Sitemap                                                              |
-| `/feed.xml`           | **Removed**                                                          |
+| Path                 | Purpose                                                    |
+| -------------------- | ---------------------------------------------------------- |
+| `/`                  | Homepage — hero + latest posts + archive strip             |
+| `/writing/`          | All writing index (current + archived, archived collapsed) |
+| `/YYYY/MM/slug/`     | Individual post (matches existing Jekyll permalinks)       |
+| `/tags/`             | Tag index                                                  |
+| `/tags/:tag/`        | Posts filtered by tag                                      |
+| `/about/`            | About page (migrated)                                      |
+| `/projects/`         | Projects page (migrated)                                   |
+| `/resume/`           | Resume page with linked PDF (migrated)                     |
+| `/newsletter/`       | Buttondown subscribe form                                  |
+| `/404.html`          | Branded 404                                                |
+| `/sitemap-index.xml` | Sitemap                                                    |
+| `/feed.xml`          | **Removed**                                                |
 
 ### Repo Layout (on the `astro-rebuild` branch)
 
@@ -152,15 +152,15 @@ const posts = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    description: z.string(),               // required; used for OG + meta
+    description: z.string(), // required; used for OG + meta
     date: z.date(),
     updated: z.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
-    featured: z.boolean().default(false),  // wider card on homepage
-    archived: z.boolean().default(false),  // true for 2015-16 posts
-    ogImage: z.string().optional(),        // override auto-generated OG
-    slug: z.string().optional(),           // override default slug
+    featured: z.boolean().default(false), // wider card on homepage
+    archived: z.boolean().default(false), // true for 2015-16 posts
+    ogImage: z.string().optional(), // override auto-generated OG
+    slug: z.string().optional(), // override default slug
   }),
 });
 ```
@@ -182,6 +182,7 @@ consistent across homepage, `/writing/`, next/prev, sitemap, and OG metadata.
 **Slug uniqueness and image integrity** are enforced by `scripts/validate-posts.ts`,
 run as an npm script before `astro build` (and wired into CI). It fails the build
 if:
+
 - Two posts resolve to the same `/YYYY/MM/slug/` path (silent last-write-wins is
   otherwise catastrophic — you lose a post with no warning).
 - A post references an image path under `public/images/` that does not exist on
@@ -200,18 +201,18 @@ rewritten where needed.
 ### Color Tokens (light only)
 
 ```css
---bg:           #ffffff;
---bg-subtle:    #f6f8fa;   /* section bands, code block background */
---surface:      #ffffff;
---border:       #d0d7de;
+--bg: #ffffff;
+--bg-subtle: #f6f8fa; /* section bands, code block background */
+--surface: #ffffff;
+--border: #d0d7de;
 --border-muted: #d8dee4;
---text:         #1f2328;
---text-muted:   #656d76;
---text-faint:   #8c959f;
---accent:       #0969da;   /* primary links, CTAs */
---accent-warm:  #bc4c00;   /* occasional emphasis */
---shadow-sm:    0 1px 2px rgba(31,35,40,0.04), 0 0 0 1px rgba(31,35,40,0.04);
---shadow-md:    0 8px 24px rgba(31,35,40,0.08);
+--text: #1f2328;
+--text-muted: #656d76;
+--text-faint: #8c959f;
+--accent: #0969da; /* primary links, CTAs */
+--accent-warm: #bc4c00; /* occasional emphasis */
+--shadow-sm: 0 1px 2px rgba(31, 35, 40, 0.04), 0 0 0 1px rgba(31, 35, 40, 0.04);
+--shadow-md: 0 8px 24px rgba(31, 35, 40, 0.08);
 ```
 
 Tag pill palette mirrors GitHub primer labels (blue / green / yellow / orange / purple).
@@ -237,10 +238,10 @@ frosted nav. Depth comes from solid surfaces + 1px borders + tight shadows + mot
 Shared motion tokens:
 
 ```css
---ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 --dur-fast: 140ms;
---dur-mid:  280ms;
+--dur-mid: 280ms;
 --dur-slow: 520ms;
 ```
 
@@ -302,7 +303,7 @@ to ~0ms.
 - Back-link ("← All writing") pinned at the top of the content column.
 - Title (large, tight tracking), byline line: date · read time · tags.
 - If `archived: true`: a small ribbon under the title —
-  *"Originally published [date]. Preserved as-is."*
+  _"Originally published [date]. Preserved as-is."_
 - Article body via `<Prose>`: generous measure, Shiki code blocks with copy button,
   inline footnotes, Mermaid diagrams.
 - Next/prev navigation at the bottom: shown only on non-archived posts, and only

@@ -5,29 +5,55 @@ import { getAllTagsWithCounts } from '../../lib/posts';
 
 const tags = await getAllTagsWithCounts();
 ---
+
 <BaseLayout title="Tags · Kiran Danduprolu" description="Browse posts by tag.">
   <div class="content">
     <h1 class="page-title">Tags</h1>
     <div class="grid">
-      {tags.map((t) => (
-        <a class="tag-card" href={`/tags/${t.tag}/`}>
-          <TagPill tag={t.tag} />
-          <span class="count">{t.count} {t.count === 1 ? 'post' : 'posts'}</span>
-        </a>
-      ))}
+      {
+        tags.map((t) => (
+          <a class="tag-card" href={`/tags/${t.tag}/`}>
+            <TagPill tag={t.tag} />
+            <span class="count">
+              {t.count} {t.count === 1 ? 'post' : 'posts'}
+            </span>
+          </a>
+        ))
+      }
     </div>
   </div>
 </BaseLayout>
 <style>
-  .page-title { margin: var(--sp-7) 0 var(--sp-5); font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.02em; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--sp-3); }
-  .tag-card {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: var(--sp-3) var(--sp-4);
-    border: 1px solid var(--border); border-radius: 10px;
-    color: var(--text);
-    transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-spring);
+  .page-title {
+    margin: var(--sp-7) 0 var(--sp-5);
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
-  .tag-card:hover { border-color: rgba(9,105,218,0.4); transform: translateY(-1px); text-decoration: none; }
-  .count { font-size: 12px; color: var(--text-muted); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--sp-3);
+  }
+  .tag-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-3) var(--sp-4);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-spring);
+  }
+  .tag-card:hover {
+    border-color: rgba(9, 105, 218, 0.4);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  .count {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
 </style>

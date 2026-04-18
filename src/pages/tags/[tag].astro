@@ -12,6 +12,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 const tag = String(Astro.params.tag);
 const posts = (await getAllPublishedPosts()).filter((p) => p.data.tags.includes(tag));
 ---
+
 <BaseLayout title={`#${tag} · Kiran Danduprolu`} description={`Posts tagged ${tag}.`}>
   <div class="content">
     <h1 class="page-title">#{tag}</h1>
@@ -21,6 +22,14 @@ const posts = (await getAllPublishedPosts()).filter((p) => p.data.tags.includes(
   </div>
 </BaseLayout>
 <style>
-  .page-title { margin: var(--sp-7) 0 var(--sp-5); font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.02em; }
-  .cards { display: grid; gap: var(--sp-3); }
+  .page-title {
+    margin: var(--sp-7) 0 var(--sp-5);
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .cards {
+    display: grid;
+    gap: var(--sp-3);
+  }
 </style>

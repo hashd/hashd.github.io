@@ -11,11 +11,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 };
 
-interface Props { post: Post; }
+interface Props {
+  post: Post;
+}
 const { post } = Astro.props as Props;
 const { Content } = await post.render();
 const { prev, next } = await getAdjacentLivePosts(post);
 ---
+
 <PostLayout post={post} body={post.body} prev={prev} next={next}>
   <Content />
 </PostLayout>

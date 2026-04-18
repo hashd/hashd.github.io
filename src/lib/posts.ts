@@ -47,9 +47,7 @@ export async function getAdjacentLivePosts(current: Post): Promise<{
   };
 }
 
-export async function getAllTagsWithCounts(): Promise<
-  Array<{ tag: string; count: number }>
-> {
+export async function getAllTagsWithCounts(): Promise<Array<{ tag: string; count: number }>> {
   const all = await getAllPublishedPosts();
   const counts = new Map<string, number>();
   for (const p of all) {

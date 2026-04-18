@@ -8,10 +8,7 @@ export default defineConfig({
   trailingSlash: 'always',
   build: { format: 'directory' },
   output: 'static',
-  integrations: [
-    mdx(),
-    sitemap({ filter: (page) => !page.includes('/og/') }),
-  ],
+  integrations: [mdx(), sitemap({ filter: (page) => !page.includes('/og/') })],
   markdown: {
     shikiConfig: {
       theme: 'github-light',

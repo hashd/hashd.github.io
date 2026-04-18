@@ -1,8 +1,15 @@
 ---
-interface Props { date: Date; }
+interface Props {
+  date: Date;
+}
 const { date } = Astro.props;
-const formatted = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const formatted = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
+
 <div class="archived-ribbon">
   <em>Originally published {formatted}. Preserved as-is.</em>
 </div>

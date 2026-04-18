@@ -16,7 +16,8 @@ const interBoldUrl = new URL(
 );
 const fallbackPngUrl = new URL('../../../public/og/default.png', import.meta.url);
 
-let cachedFonts: Array<{ name: string; data: Buffer; weight: 400 | 700; style: 'normal' }> | null = null;
+let cachedFonts: Array<{ name: string; data: Buffer; weight: 400 | 700; style: 'normal' }> | null =
+  null;
 async function loadFonts() {
   if (cachedFonts) return cachedFonts;
   const [regular, bold] = await Promise.all([

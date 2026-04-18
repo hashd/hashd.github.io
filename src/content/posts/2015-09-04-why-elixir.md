@@ -1,6 +1,6 @@
 ---
-title: "Why Elixir?"
-description: "A note on why a Rails developer became curious about Elixir, and what it took to stay."
+title: 'Why Elixir?'
+description: 'A note on why a Rails developer became curious about Elixir, and what it took to stay.'
 date: 2015-09-04
 tags: [elixir, functional]
 archived: true
@@ -19,4 +19,3 @@ With enough knowledge of Elixir at this point in time, I have started to explore
 > One's problem today can be everyone's problem tomorrow
 
 Elixir clearly tries to leverage all the good parts of Erlang and tries to add to it, a much modern syntax, metaprogramming abilities, consistent behaviour, pipelines, UTF& Strings, protocols and probably the most modern tooling for any programming language.
-

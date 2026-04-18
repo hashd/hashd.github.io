@@ -1,5 +1,6 @@
 _site
 .idea
+.superpowers/
 .DS_Store
 .jekyll
 .jekyll-metadata

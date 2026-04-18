@@ -225,7 +225,10 @@ to ~0ms.
   fade + 6px rise).
 - **Scroll reveals** for post cards below the fold via `IntersectionObserver`; cards
   above the fold render pre-revealed to avoid flash.
-- **FLIP reorder** on `/tags/:tag/` as the filter narrows the list.
+- **Card reorder** when arriving at `/tags/:tag/` from `/writing/` or `/tags/`:
+  Astro View Transitions animate shared `view-transition-name` cards into their new
+  positions, producing a FLIP-like reorder. (Pure server-rendered navigation — no
+  client-side filtering.)
 
 **Micro-interactions**
 
@@ -260,8 +263,8 @@ to ~0ms.
 - Chronological list of all posts.
 - Archived posts grouped under a collapsed "Archive" section (expands inline, no page
   load).
-- Tag filter row along the top. Clicking a tag navigates to `/tags/:tag/` via View
-  Transitions.
+- Row of tag chips near the top linking to `/tags/:tag/`. Navigation uses View
+  Transitions; there is no client-side filtering on this page.
 
 ### `/YYYY/MM/slug/` — Post Page
 
@@ -271,7 +274,9 @@ to ~0ms.
   *"Originally published [date]. Preserved as-is."*
 - Article body via `<Prose>`: generous measure, Shiki code blocks with copy button,
   inline footnotes, Mermaid diagrams.
-- Next/prev navigation at the bottom (non-archived only).
+- Next/prev navigation at the bottom: shown only on non-archived posts, and only
+  traverses other non-archived posts chronologically. Archived posts do not show
+  next/prev (they stand alone as preserved artifacts).
 - Compact newsletter block.
 - Giscus below.
 
@@ -279,8 +284,9 @@ to ~0ms.
 
 - `/tags/`: grid of tags, each with post count. Hover = spring scale (consistent with
   inline pills).
-- `/tags/:tag/`: same card layout as homepage, filtered. FLIP-style reorder when
-  arriving from `/writing/`.
+- `/tags/:tag/`: same card layout as homepage, showing posts that include the tag.
+  Server-rendered; shared `view-transition-name` on cards produces a FLIP-like
+  reorder when arriving from `/writing/` or `/tags/`.
 
 ### `/about/`, `/projects/`, `/resume/`
 

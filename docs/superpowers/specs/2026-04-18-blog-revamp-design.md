@@ -61,7 +61,10 @@ Old posts are preserved verbatim under the same URLs and flagged as archived.
 - **Styling**: vanilla CSS with CSS variables. No Tailwind, no CSS-in-JS.
 - **Typography**: system sans (`-apple-system, "Segoe UI", ...`) for body/UI;
   `ui-monospace, "SF Mono", Menlo, Consolas` for code. No external fonts.
-- **Syntax highlighting**: Shiki with `github-light` theme.
+- **Syntax highlighting**: Shiki with `github-light` theme, configured in
+  **CSS-variables mode** (`defaultColor: false`, emit class names) so tokens get class
+  names and the theme ships as a small stylesheet rather than inline
+  `style="color:#..."` on every `<span>`. Keeps code-heavy posts lean.
 - **Comments**: Giscus, mounted per post.
 - **Analytics**: GA4 via `gtag`, gated on `PUBLIC_GA_ID` env var.
 - **Newsletter**: Buttondown — a dedicated `/newsletter/` page plus a compact block in
@@ -70,6 +73,12 @@ Old posts are preserved verbatim under the same URLs and flagged as archived.
 - **OG images**: build-time generation via `satori` / Astro's OG image pattern, one per
   post.
 - **Sitemap**: `@astrojs/sitemap`.
+- **Astro config hard requirements** (preserve URL parity with Jekyll):
+  - `trailingSlash: 'always'`
+  - `build.format: 'directory'`
+  - Without both set, GitHub Pages will 404 on legacy inbound links of the form
+    `/YYYY/MM/slug` (no trailing slash) and on `/YYYY/MM/slug.html` — Jekyll emitted
+    these. Pin in `astro.config.mjs` and verify in the linkinator pass.
 
 ### URL Scheme
 
@@ -155,6 +164,28 @@ const posts = defineCollection({
   }),
 });
 ```
+
+**Slug derivation** for `[...slug].astro`: post filenames are `YYYY-MM-DD-foo.md`
+(matching the existing Jekyll convention). The `[...slug].astro` route splits the
+date prefix off the filename (or off the `date` frontmatter field when the two
+disagree; `date` wins) and produces `/YYYY/MM/foo/` — for example, the file
+`src/content/posts/2015-09-04-why-elixir.md` with `date: 2015-09-04` renders at
+`/2015/09/why-elixir/`. A post that sets an explicit `slug` override replaces the
+`foo` segment; the `/YYYY/MM/` prefix always comes from `date`.
+
+**Filter helpers are centralized** in `src/lib/posts.ts`. Every page consumes
+`getLivePosts()` / `getArchivedPosts()` / `getAllPublishedPosts()` from this module
+— no page calls `getCollection('posts')` and filters inline. This guarantees that
+`draft: true` is excluded everywhere and that the archived/live partition is
+consistent across homepage, `/writing/`, next/prev, sitemap, and OG metadata.
+
+**Slug uniqueness and image integrity** are enforced by `scripts/validate-posts.ts`,
+run as an npm script before `astro build` (and wired into CI). It fails the build
+if:
+- Two posts resolve to the same `/YYYY/MM/slug/` path (silent last-write-wins is
+  otherwise catastrophic — you lose a post with no warning).
+- A post references an image path under `public/images/` that does not exist on
+  disk.
 
 Read time is computed at build time from word count at 250 wpm. `description` is
 required — this forces deliberate summaries for OG cards. `draft: true` posts are
@@ -306,7 +337,8 @@ to ~0ms.
 1. Create `astro-rebuild` branch off `master`.
 2. Move the entire Jekyll tree into `legacy/` on that branch.
 3. Scaffold Astro at the repo root; wire up content collections, layouts, components,
-   tokens.
+   tokens. Pin `trailingSlash: 'always'` and `build.format: 'directory'` in
+   `astro.config.mjs`.
 4. Migrate the 6 posts from `legacy/_posts/` into `src/content/posts/`:
    - Keep date-prefixed filenames.
    - Rewrite frontmatter to match the new schema. `description` is required — write
@@ -316,21 +348,55 @@ to ~0ms.
 5. Migrate `/about/`, `/projects/`, `/resume/` content and linked assets (resume PDF
    into `public/resume/`).
 6. Migrate favicon and logo into `public/`.
-7. Wire Giscus (Discussions enabled on this repo).
-8. Wire GA4 via `PUBLIC_GA_ID`.
-9. Wire Buttondown embed via `PUBLIC_BUTTONDOWN_USER`.
-10. Add `FUTURE_VISION.md` at repo root to log deferred ideas (search, RSS, dark mode,
+7. Copy the existing `CNAME` into `public/CNAME` so the custom-domain binding
+   survives the first Actions deploy.
+8. Wire Giscus (Discussions enabled on this repo).
+9. Wire GA4 via `PUBLIC_GA_ID`.
+10. Wire Buttondown embed via `PUBLIC_BUTTONDOWN_USER`.
+11. Add `FUTURE_VISION.md` at repo root to log deferred ideas (search, RSS, dark mode,
     and anything else that comes up).
-11. Validate 404s and run internal link check against `/dist`. Because URLs are
-    preserved, no redirects are needed for old inbound links.
-12. Squash-merge `astro-rebuild` → `master` when the live site is ready.
-13. Optional follow-up commit to delete `legacy/` after a release of safety-net time.
+12. Run `scripts/validate-posts.ts` (slug uniqueness, image refs), `astro build`,
+    and linkinator against `/dist`. Because URLs are preserved, no redirects are
+    needed for old inbound links — but the linkinator pass must include the full
+    archived URL list extracted from `legacy/_posts/` to prove parity.
+13. In repo Settings → Pages, flip the deployment source from "Deploy from a
+    branch" to "GitHub Actions". Do this before merging so the first push to
+    `master` actually triggers the Actions-based deploy.
+14. Squash-merge `astro-rebuild` → `master`.
+15. After the first successful Actions deploy, delete the remote `gh-pages`
+    branch (`git push origin --delete gh-pages`) so the stale Pages source can't
+    race with the new one. Confirm the custom domain + TLS binding are still
+    healthy.
+16. Optional follow-up commit to delete `legacy/` after a release of safety-net time.
 
 ## Hosting & Deployment
 
 - **GitHub Pages**, existing `CNAME` (`kiran.danduprolu.com`) preserved.
-- **GitHub Actions**: `.github/workflows/deploy.yml` runs `astro build` on push to
-  `master` and deploys `/dist` via the Pages deployment action.
+
+### Pages source migration (must happen before cutover)
+
+The current repo deploys from a branch-based Pages source (`origin/gh-pages` exists
+as a remote branch). The new site uses the Actions-based Pages deployment. If both
+are active at cutover, the Action races with stale `gh-pages` content and can
+either no-op or regress the live site. Migration steps, executed in order:
+
+1. On the `astro-rebuild` branch, copy `CNAME` into `public/CNAME` so the Astro
+   build emits it into `/dist/` on every deploy. (Without this step the first
+   Actions deploy replaces the branch content and the custom domain is lost.)
+2. Before merging `astro-rebuild` → `master`, flip the repo's Pages source from
+   "Deploy from a branch" to "GitHub Actions" in repo Settings → Pages.
+3. After the first successful Actions deploy on `master`, delete the remote
+   `gh-pages` branch (`git push origin --delete gh-pages`) so the stale source is
+   gone. Local stale refs can be pruned with `git remote prune origin`.
+4. Verify the custom domain binding and TLS certificate are still set on the Pages
+   settings page after the source switch — the `CNAME` file in `/dist/` should
+   keep this stable, but confirm.
+
+### Actions workflow
+
+- `.github/workflows/deploy.yml` runs `astro build` on push to `master` and
+  deploys `/dist` via `actions/deploy-pages@v4`. Includes the
+  `scripts/validate-posts.ts` step and linkinator against `/dist` before deploy.
 - Client-visible env vars (`PUBLIC_GA_ID`, `PUBLIC_BUTTONDOWN_USER`, Giscus repo/ID) are
   plain workflow vars — they ship to the client anyway, so they are not secrets.
 
@@ -350,8 +416,12 @@ to ~0ms.
   without coverage value.
 - **Build-time checks are the test surface**:
   - Zod schema validation on every post (missing / malformed frontmatter fails build).
+  - `scripts/validate-posts.ts` (duplicate `/YYYY/MM/slug/` routes, missing image
+    references under `public/images/`).
   - `astro check` (template + type errors).
-  - Internal link check (broken refs fail build).
+  - Internal link check via `linkinator` against `/dist` (broken refs fail build).
+    Configured with `--recurse=false` and skip patterns for outbound hosts so the
+    check stays on internal links.
 - **Visual smoke checklist** at `scripts/preview.md`: home, post, tag, archive, 404,
   projects, resume.
 - **Manual Lighthouse pass** before cutover — target 95+ on all four axes.

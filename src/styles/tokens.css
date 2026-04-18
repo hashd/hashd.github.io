@@ -1,0 +1,62 @@
+:root {
+  /* Colors (GitHub light) */
+  --bg: #ffffff;
+  --bg-subtle: #f6f8fa;
+  --surface: #ffffff;
+  --border: #d0d7de;
+  --border-muted: #d8dee4;
+  --text: #1f2328;
+  --text-muted: #656d76;
+  --text-faint: #8c959f;
+  --accent: #0969da;
+  --accent-warm: #bc4c00;
+  --shadow-sm: 0 1px 2px rgba(31, 35, 40, 0.04), 0 0 0 1px rgba(31, 35, 40, 0.04);
+  --shadow-md: 0 8px 24px rgba(31, 35, 40, 0.08);
+
+  /* Tag palette */
+  --tag-blue-bg: #ddf4ff;
+  --tag-blue-fg: #0969da;
+  --tag-green-bg: #dafbe1;
+  --tag-green-fg: #1a7f37;
+  --tag-yellow-bg: #fff8c5;
+  --tag-yellow-fg: #9a6700;
+  --tag-orange-bg: #fff1e5;
+  --tag-orange-fg: #bc4c00;
+  --tag-purple-bg: #fbefff;
+  --tag-purple-fg: #8250df;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Spacing scale */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 72px;
+  --sp-9: 112px;
+
+  /* Type scale */
+  --fs-xs: 13px;
+  --fs-sm: 15px;
+  --fs-md: 17px;
+  --fs-lg: 20px;
+  --fs-xl: 24px;
+  --fs-2xl: 32px;
+  --fs-3xl: 48px;
+
+  /* Layout */
+  --content-max: 760px;
+  --chrome-max: 960px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 140ms;
+  --dur-mid: 280ms;
+  --dur-slow: 520ms;
+}

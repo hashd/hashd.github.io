@@ -1,0 +1,35 @@
+---
+/*
+ * Giscus IDs are committed — they ship to the client anyway.
+ * Replace the placeholder repo-id / category-id with values produced
+ * by https://giscus.app after Discussions is enabled on the repo (Task 34).
+ */
+const GISCUS_REPO = 'hashd/hashd.github.io';
+const GISCUS_REPO_ID = 'REPLACE_AT_WIRE_UP';
+const GISCUS_CATEGORY = 'General';
+const GISCUS_CATEGORY_ID = 'REPLACE_AT_WIRE_UP';
+---
+
+<section class="giscus-root" aria-label="Comments">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo={GISCUS_REPO}
+    data-repo-id={GISCUS_REPO_ID}
+    data-category={GISCUS_CATEGORY}
+    data-category-id={GISCUS_CATEGORY_ID}
+    data-mapping="pathname"
+    data-strict="1"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading="lazy"
+    crossorigin="anonymous"
+    async></script>
+</section>
+<style>
+  .giscus-root {
+    margin-top: var(--sp-7);
+  }
+</style>

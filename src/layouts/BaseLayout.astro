@@ -1,0 +1,58 @@
+---
+import '../styles/global.css';
+import '../styles/motion.css';
+import '../styles/shiki.css';
+import { ViewTransitions } from 'astro:transitions';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import GA4 from '../components/GA4.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+}
+const { title, description, ogImage } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const og = ogImage ?? new URL('/og/default.png', Astro.site).toString();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={og} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" />
+    <ViewTransitions />
+    <GA4 />
+  </head>
+  <body>
+    <SiteHeader />
+    <main><slot /></main>
+    <SiteFooter />
+    <script>
+      (() => {
+        const header = document.getElementById('siteHeader');
+        if (!header) return;
+        let ticking = false;
+        const onScroll = () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            header.classList.toggle('scrolled', window.scrollY > 8);
+            ticking = false;
+          });
+        };
+        document.addEventListener('scroll', onScroll, { passive: true });
+      })();
+    </script>
+  </body>
+</html>

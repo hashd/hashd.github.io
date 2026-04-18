@@ -1,0 +1,25 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Prose from '../components/Prose.astro';
+
+interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={`${title} · Kiran Danduprolu`} description={description}>
+  <div class="content" style="padding: var(--sp-7) 0;">
+    <h1 class="page-title">{title}</h1>
+    <Prose><slot /></Prose>
+  </div>
+</BaseLayout>
+<style>
+  .page-title {
+    margin: 0 0 var(--sp-5);
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+</style>

@@ -1,5 +1,6 @@
 _site
 .idea
+.superpowers/
 .DS_Store
 .jekyll
 .jekyll-metadata
@@ -7,5 +8,10 @@ _site
 .sass-cache
 Gemfile
 Gemfile.lock
-node_modules
-package.json
+# Astro
+dist/
+.astro/
+node_modules/
+.env
+.env.local
+.env.*.local

@@ -1,0 +1,121 @@
+---
+const navItems: Array<{ href: string; label: string }> = [
+  { href: '/writing/', label: 'Writing' },
+  { href: '/tags/', label: 'Tags' },
+  { href: '/projects/', label: 'Projects' },
+  { href: '/resume/', label: 'Resume' },
+  { href: '/about/', label: 'About' },
+];
+const { pathname } = Astro.url;
+---
+
+<header class="site-header" id="siteHeader">
+  <div class="chrome header-inner">
+    <a class="brand" href="/">
+      <span class="avatar" aria-hidden="true"></span>
+      <span class="brand-text">
+        <span class="brand-name">Kiran Danduprolu</span>
+        <span class="brand-sub">Engineer · backend &amp; systems</span>
+      </span>
+    </a>
+    <nav class="primary" aria-label="Primary">
+      {
+        navItems.map((i) => (
+          <a href={i.href} class={pathname.startsWith(i.href) ? 'active' : ''}>
+            {i.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid transparent;
+    transition:
+      box-shadow var(--dur-mid) var(--ease-out),
+      border-color var(--dur-mid) var(--ease-out);
+  }
+  .site-header.scrolled {
+    box-shadow: var(--shadow-sm);
+    border-bottom-color: var(--border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+    padding: var(--sp-4) 0;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    color: var(--text);
+  }
+  .brand:hover {
+    text-decoration: none;
+  }
+  .brand:hover .avatar {
+    transform: rotate(-6deg) scale(1.08);
+  }
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0969da 0%, #8250df 100%);
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    transition: transform var(--dur-fast) var(--ease-spring);
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .brand-name {
+    font-weight: 600;
+    font-size: var(--fs-sm);
+  }
+  .brand-sub {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+  }
+  nav.primary {
+    margin-left: auto;
+    display: flex;
+    gap: 2px;
+  }
+  nav.primary a {
+    position: relative;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 14px;
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: 6px;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
+  }
+  nav.primary a:hover {
+    color: var(--text);
+    background: var(--bg-subtle);
+    text-decoration: none;
+  }
+  nav.primary a.active {
+    color: var(--text);
+  }
+  nav.primary a.active::after {
+    content: '';
+    position: absolute;
+    left: var(--sp-3);
+    right: var(--sp-3);
+    bottom: 2px;
+    height: 2px;
+    background: #fd8c73;
+    border-radius: 1px;
+    animation: underline-in var(--dur-mid) var(--ease-out) both;
+  }
+</style>

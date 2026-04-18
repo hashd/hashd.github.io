@@ -1,0 +1,89 @@
+---
+interface Props {
+  variant?: 'full' | 'compact';
+}
+const { variant = 'full' } = Astro.props;
+const user = import.meta.env.PUBLIC_BUTTONDOWN_USER ?? 'kirandanduprolu';
+const action = `https://buttondown.email/api/emails/embed-subscribe/${user}`;
+---
+
+<aside class:list={['nl', `nl--${variant}`]}>
+  <div class="nl-copy">
+    <h3>The occasional dispatch</h3>
+    <p>Long-form posts, maybe once a month. No spam.</p>
+  </div>
+  <form class="nl-form" action={action} method="post">
+    <input type="email" name="email" required placeholder="you@example.com" aria-label="Email" />
+    <button type="submit" class="btn">Subscribe →</button>
+  </form>
+</aside>
+
+<style>
+  .nl {
+    margin: var(--sp-7) 0 0;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: var(--sp-5) var(--sp-6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-5);
+    background:
+      radial-gradient(120% 200% at 100% 0%, rgba(9, 105, 218, 0.05), rgba(9, 105, 218, 0) 55%),
+      var(--bg);
+  }
+  .nl--compact {
+    padding: var(--sp-4) var(--sp-5);
+    gap: var(--sp-4);
+  }
+  .nl h3 {
+    margin: 0 0 4px;
+    font-size: var(--fs-md);
+    font-weight: 600;
+  }
+  .nl p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .nl-form {
+    display: flex;
+    gap: var(--sp-2);
+  }
+  .nl-form input {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    min-width: 200px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    box-shadow:
+      0 1px 0 rgba(31, 35, 40, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition:
+      transform var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-fast) var(--ease-out),
+      background var(--dur-fast) var(--ease-out);
+  }
+  .btn:hover {
+    background: #0860c7;
+    box-shadow: 0 4px 12px rgba(9, 105, 218, 0.25);
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+</style>

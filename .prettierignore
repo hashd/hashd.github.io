@@ -1,0 +1,9 @@
+dist/
+.astro/
+node_modules/
+pnpm-lock.yaml
+legacy/
+public/about/
+public/resume/
+src/components/GA4.astro
+docs/

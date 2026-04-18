@@ -1,0 +1,59 @@
+<script>
+  function enhanceCodeBlocks() {
+    const blocks = document.querySelectorAll<HTMLPreElement>('.prose pre');
+    blocks.forEach((pre) => {
+      if (pre.querySelector('.copy-btn')) return;
+      const btn = document.createElement('button');
+      btn.className = 'copy-btn';
+      btn.type = 'button';
+      btn.textContent = 'Copy';
+      btn.addEventListener('click', async () => {
+        const code = pre.querySelector('code')?.innerText ?? pre.innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          btn.textContent = 'Copied ✓';
+          btn.classList.add('copied');
+        } catch {
+          btn.textContent = 'Copy failed';
+        }
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1400);
+      });
+      pre.appendChild(btn);
+    });
+  }
+  document.addEventListener('astro:page-load', enhanceCodeBlocks);
+</script>
+
+<style is:global>
+  .prose pre .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--surface);
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: 0;
+    transition:
+      opacity var(--dur-fast) var(--ease-out),
+      border-color var(--dur-fast) var(--ease-out),
+      color var(--dur-fast) var(--ease-out);
+  }
+  .prose pre:hover .copy-btn {
+    opacity: 1;
+    border-color: var(--border);
+  }
+  .prose pre .copy-btn:hover {
+    color: var(--text);
+  }
+  .prose pre .copy-btn.copied {
+    color: #1a7f37;
+    border-color: #1a7f37;
+  }
+</style>

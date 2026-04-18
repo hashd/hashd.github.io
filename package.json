@@ -1,0 +1,47 @@
+{
+  "name": "kiran-blog",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.12.3",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "pnpm validate:posts && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "validate:posts": "tsx scripts/validate-posts.ts",
+    "linkcheck": "start-server-and-test 'astro preview --port 4321' http://localhost:4321 'linkinator http://localhost:4321/ --recurse --silent --skip ^https://'",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .ts,.astro,.tsx,.jsx,.mjs",
+    "prepare": "simple-git-hooks"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "^3.1.9",
+    "@astrojs/sitemap": "~3.2.1",
+    "@fontsource/inter": "^5.1.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@typescript-eslint/parser": "^8.12.2",
+    "astro": "^4.16.0",
+    "astro-eslint-parser": "^1.1.0",
+    "eslint": "^9.14.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "gray-matter": "^4.0.3",
+    "linkinator": "^6.1.2",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "rehype-mermaid": "^2.1.0",
+    "satori": "^0.11.3",
+    "satori-html": "^0.3.2",
+    "shiki": "^1.22.2",
+    "simple-git-hooks": "^2.11.1",
+    "start-server-and-test": "^2.0.8",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

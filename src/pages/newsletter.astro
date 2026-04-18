@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import NewsletterBlock from '../components/NewsletterBlock.astro';
+---
+
+<BaseLayout
+  title="Newsletter · Kiran Danduprolu"
+  description="Subscribe to the occasional dispatch."
+>
+  <div class="content" style="padding: var(--sp-7) 0;">
+    <h1 class="page-title">Subscribe</h1>
+    <p class="lede">The occasional dispatch — long-form posts, once every month or two.</p>
+    <NewsletterBlock />
+  </div>
+</BaseLayout>
+<style>
+  .page-title {
+    margin: 0 0 var(--sp-3);
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .lede {
+    color: var(--text-muted);
+    font-size: 18px;
+    max-width: 560px;
+  }
+</style>

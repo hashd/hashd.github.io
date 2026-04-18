@@ -1,0 +1,78 @@
+---
+import type { Post } from '../lib/posts';
+import { postHref } from '../lib/posts';
+import TagPill from './TagPill.astro';
+
+interface Props {
+  post: Post;
+  featured?: boolean;
+}
+const { post, featured = false } = Astro.props;
+const href = postHref(post);
+const dateStr = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+});
+---
+
+<a class:list={['post-card', 'reveal-target', featured && 'featured']} href={href}>
+  <h3 class="post-title">{post.data.title}</h3>
+  <p class="post-excerpt">{post.data.description}</p>
+  <div class="post-meta">
+    {post.data.tags.map((t) => <TagPill tag={t} href={`/tags/${t}/`} />)}
+    <span class="date">{dateStr}</span>
+  </div>
+</a>
+
+<style>
+  .post-card {
+    display: block;
+    color: inherit;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: var(--sp-4) var(--sp-5);
+    background: var(--surface);
+    transition:
+      border-color var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-mid) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .post-card.featured {
+    padding: var(--sp-5) var(--sp-6);
+  }
+  .post-card:hover {
+    border-color: rgba(9, 105, 218, 0.4);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  .post-card:hover .post-title {
+    color: var(--accent);
+  }
+  .post-title {
+    margin: 0;
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .post-excerpt {
+    margin: var(--sp-2) 0 0;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .post-meta {
+    margin-top: var(--sp-3);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    flex-wrap: wrap;
+  }
+  .date {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-left: var(--sp-1);
+  }
+</style>

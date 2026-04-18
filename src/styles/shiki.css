@@ -1,0 +1,37 @@
+/* github-light via CSS variables (shiki defaultColor: false) */
+.astro-code {
+  background: var(--bg-subtle);
+  color: var(--text);
+}
+.astro-code .token.keyword,
+.astro-code .k {
+  color: #cf222e;
+}
+.astro-code .token.function,
+.astro-code .fn,
+.astro-code .entity.name.function {
+  color: #8250df;
+}
+.astro-code .token.string,
+.astro-code .s,
+.astro-code .string {
+  color: #0a3069;
+}
+.astro-code .token.comment,
+.astro-code .com,
+.astro-code .comment {
+  color: #6e7781;
+  font-style: italic;
+}
+.astro-code .token.number,
+.astro-code .num,
+.astro-code .constant {
+  color: #0550ae;
+}
+.astro-code .variable,
+.astro-code .v {
+  color: #953800;
+}
+.astro-code .punctuation {
+  color: var(--text-muted);
+}

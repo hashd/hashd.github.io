@@ -15,7 +15,7 @@ importers:
         specifier: ^3.1.9
         version: 3.1.9(astro@4.16.19(@types/node@24.12.2)(rollup@4.60.2)(typescript@5.9.3))
       '@astrojs/sitemap':
-        specifier: ^3.2.1
+        specifier: ~3.2.1
         version: 3.2.1
       '@resvg/resvg-js':
         specifier: ^2.6.2

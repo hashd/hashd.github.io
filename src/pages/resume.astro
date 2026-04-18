@@ -1,0 +1,397 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import resumeData from '../data/resume.json';
+---
+
+<BaseLayout title="Resume - Kiran Danduprolu" description="Work experience and skills.">
+  <div class="content resume-content">
+    <section class="resume-header">
+      <div class="intro-label">Curriculum Vitae</div>
+      <h1>Kiran<br/>Danduprolu</h1>
+      <p class="lede">
+        Engineer, building complex systems, focusing on distributed backends, functional programming, and type safety.<br/>
+        <a href={`mailto:${resumeData.personal.email}`}>{resumeData.personal.email}</a> &mdash; <a href={`https://github.com/${resumeData.personal.githubId}`} target="_blank">GitHub: @{resumeData.personal.githubId}</a>
+      </p>
+    </section>
+
+    <!-- Experience Section -->
+    <div class="resume-section">
+      <h2>Experience</h2>
+      <div class="resume-items">
+        {resumeData.experience.map((exp: any) => (
+          <article class="resume-item">
+            <h3 class="org-title">{exp.orgName}</h3>
+            {exp.roles.map((role: any) => (
+              <div class="role-block">
+                <div class="job-header">
+                  <h4>{role.roleName}</h4>
+                  <span class="job-date">{role.startDate} &mdash; {role.endDate || 'Present'}</span>
+                </div>
+                {role.description && <p class="job-desc">{role.description}</p>}
+                {role.highlights && (
+                  <ul class="job-points">
+                    {role.highlights.map((hlt: string) => <li>{hlt}</li>)}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="resume-section">
+      <h2>Projects</h2>
+      <div class="resume-items">
+        {resumeData.projects.map((proj: any) => (
+          <article class="resume-item">
+            <div class="job-header">
+              <h3 class="project-title">{proj.name}</h3>
+              <span class="job-company">{proj.role}</span>
+              <span class="job-date">{proj.start} &mdash; {proj.end}</span>
+            </div>
+            {proj.description && <p class="job-desc">{proj.description}</p>}
+            {proj.highlights && (
+              <ul class="job-points">
+                {proj.highlights.map((hlt: string) => <li>{hlt}</li>)}
+              </ul>
+            )}
+            {proj.stack && (
+              <div class="stack-tags">
+                {proj.stack.map((tech: string) => <span class="tag">{tech}</span>)}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Open Source Section -->
+    <div class="resume-section">
+      <h2>Open Source</h2>
+      <div class="resume-items">
+        {resumeData.openSource.map((oss: any) => (
+          <article class="resume-item">
+            <div class="job-header">
+              <h3 class="project-title"><a href={oss.link} target="_blank">{oss.name}</a></h3>
+              <span class="job-company">{oss.role}</span>
+              <span class="job-date">{oss.start} &mdash; {oss.end}</span>
+            </div>
+            <p class="job-desc">{oss.description}</p>
+            {oss.stack && (
+              <div class="stack-tags">
+                {oss.stack.map((tech: string) => <span class="tag">{tech}</span>)}
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+
+    <!-- Technical Arsenal -->
+    <div class="resume-section">
+      <h2>Technical Arsenal</h2>
+      <div class="skills-grid">
+        {resumeData.skillset.map((group: any) => (
+          <div class="skill-category">
+            <h3>{group.groupName}</h3>
+            <p>{group.skills.join(', ')}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Education Section -->
+    <div class="resume-section">
+      <h2>Education & Achievements</h2>
+      <div class="resume-items">
+        {resumeData.education.map((edu: any) => (
+          <article class="resume-item edu-item">
+            <div class="job-header">
+              <h3 class="project-title">{edu.school}</h3>
+              <span class="job-company">{edu.course} ({edu.branch}) &mdash; {edu.place}</span>
+              <span class="job-date">{edu.startYear} &mdash; {edu.endYear}</span>
+            </div>
+          </article>
+        ))}
+        {resumeData.achievements && resumeData.achievements.map((ach: any) => (
+          <article class="resume-item edu-item">
+            <div class="job-header">
+              <h3 class="project-title">{ach.name}</h3>
+              <span class="job-company">Presented by: {ach.presenter}</span>
+              <span class="job-date">{ach.year}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .resume-content {
+    max-width: 860px; /* Make it wider */
+  }
+
+  .resume-header {
+    padding: var(--sp-4) 0 var(--sp-4);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    margin-top: var(--sp-4);
+    margin-bottom: var(--sp-5);
+    border-bottom: 2px solid var(--border);
+  }
+
+  .intro-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--surface-solid);
+    background: var(--text);
+    padding: var(--sp-1) var(--sp-2);
+    margin-bottom: var(--sp-2);
+    border-radius: 0;
+    box-shadow: 2px 2px 0 var(--accent-warm);
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) 100ms both;
+  }
+  
+  .resume-header h1 {
+    margin: 0 0 var(--sp-2);
+    font-size: var(--fs-3xl);
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: var(--text);
+    text-transform: uppercase;
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) 200ms both;
+  }
+  
+  .resume-header .lede {
+    margin: 0;
+    max-width: 780px;
+    color: var(--text-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    font-weight: 500;
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) 300ms both;
+  }
+  .resume-header .lede a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    font-weight: 600;
+    transition: color var(--dur-fast), text-decoration-color var(--dur-fast);
+  }
+  .resume-header .lede a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  .resume-section {
+    margin-bottom: var(--sp-5);
+    animation: curtain-up var(--dur-xslow) var(--ease-spring) 400ms both;
+  }
+
+  .resume-section h2 {
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-weight: 800;
+    margin-bottom: var(--sp-4);
+    padding-bottom: var(--sp-2);
+    border-bottom: 2px solid var(--text);
+    color: var(--text);
+  }
+
+  .resume-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-4);
+  }
+
+  .resume-item {
+    position: relative;
+    padding-bottom: var(--sp-4);
+    border-bottom: 1px dashed var(--border);
+  }
+  .resume-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .org-title {
+    margin: 0 0 var(--sp-2) 0;
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  
+  .project-title {
+    grid-area: title;
+    margin: 0;
+    font-size: var(--fs-md);
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--text);
+  }
+  .project-title a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color var(--dur-fast);
+  }
+  .project-title a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  .role-block {
+    margin-top: var(--sp-3);
+  }
+  .role-block:first-of-type {
+    margin-top: 0;
+  }
+
+  .job-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: 
+      "title date"
+      "company date";
+    gap: 0 var(--sp-3);
+    margin-bottom: var(--sp-2);
+    align-items: baseline;
+  }
+
+  @media (max-width: 600px) {
+    .job-header {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "title"
+        "company"
+        "date";
+    }
+    .job-date {
+      margin-top: var(--sp-1);
+    }
+  }
+
+  .job-header h4 {
+    grid-area: title;
+    margin: 0;
+    font-size: var(--fs-sm);
+    font-family: var(--font-display);
+    font-weight: 800;
+    color: var(--text);
+    text-transform: uppercase;
+  }
+
+  .job-company {
+    grid-area: company;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .job-date {
+    grid-area: date;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    justify-self: end;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  .job-desc {
+    margin: 0 0 var(--sp-2) 0;
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+
+  .job-points {
+    margin: 0 0 var(--sp-2) 0;
+    padding-left: var(--sp-4);
+  }
+  .job-points li {
+    margin-bottom: var(--sp-1);
+    line-height: 1.4;
+    color: var(--text);
+    font-size: var(--fs-sm);
+  }
+  .job-points li::marker {
+    color: var(--text-muted);
+  }
+  
+  .stack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-1);
+    margin-top: var(--sp-2);
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 4px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--surface-solid);
+    text-transform: uppercase;
+  }
+
+  /* Skills Grid */
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+  }
+
+  .skill-category {
+    padding: var(--sp-2) var(--sp-3);
+    border-left: 2px solid var(--border);
+    background: var(--surface-solid);
+    flex: 1 1 200px;
+  }
+
+  .skill-category h3 {
+    margin: 0 0 var(--sp-1) 0;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .skill-category p {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+  }
+
+  .edu-item .job-header {
+    margin-bottom: 0;
+  }
+</style>

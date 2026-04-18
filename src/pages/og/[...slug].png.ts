@@ -56,10 +56,12 @@ export const GET: APIRoute = async ({ props }) => {
       fonts,
     });
     const png = new Resvg(svg).render().asPng();
-    return new Response(png, { headers: { 'Content-Type': 'image/png' } });
+    return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
   } catch (err) {
     console.warn('[og] generation failed, using fallback', err);
     const fallback = await loadFallback();
-    return new Response(fallback, { headers: { 'Content-Type': 'image/png' } });
+    return new Response(new Uint8Array(fallback), {
+      headers: { 'Content-Type': 'image/png' },
+    });
   }
 };

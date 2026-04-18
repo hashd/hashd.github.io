@@ -4,6 +4,7 @@ description: "JavaScript classes are syntactic sugar — but some of the flavor 
 date: 2016-06-23
 tags: [javascript]
 archived: true
+slug: 2016-06-23-fun-with-classes-in-ES6
 ---
 
 JavaScript was my favorite language until I met Elixir and now TypeScript for the amount of freedom it provides to the developer (probably enough to even shoot yourself on your feet). JavaScript like many other non-modern languages is trying to catch up on the developer joy train with ES6 and further specs. One of the controversial features that has been added in ES6 is **classes**, a sugar coated syntax to help create functions which would act like classes in a more standard manner.

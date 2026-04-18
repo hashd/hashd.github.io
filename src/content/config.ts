@@ -12,7 +12,6 @@ const posts = defineCollection({
     featured: z.boolean().default(false),
     archived: z.boolean().default(false),
     ogImage: z.string().optional(),
-    slug: z.string().optional(),
   }),
 });
 

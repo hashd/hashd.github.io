@@ -6,7 +6,7 @@ export function postHref(post: Post): string {
   const date = post.data.date;
   const year = date.getUTCFullYear().toString();
   const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-  const slug = post.data.slug ?? post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+  const slug = post.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
   return `/${year}/${month}/${slug}/`;
 }
 

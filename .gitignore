@@ -8,5 +8,10 @@ _site
 .sass-cache
 Gemfile
 Gemfile.lock
-node_modules
-package.json
+# Astro
+dist/
+.astro/
+node_modules/
+.env
+.env.local
+.env.*.local
